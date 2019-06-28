@@ -1,10 +1,7 @@
 package com.dangdang.config.face.config;
 
-import com.dangdang.config.face.service.INodeService;
-import com.google.common.base.Charsets;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.common.hash.Hashing;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Objects;
+import com.dangdang.config.face.service.INodeService;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 @Configuration
 @EnableWebSecurity
@@ -59,7 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new PasswordEncoder() {
             @Override
             public String encode(CharSequence rawPassword) {
-                return Hashing.sha1().hashString(rawPassword, Charsets.UTF_8).toString();
+                // return Hashing.sha1().hashString(rawPassword, Charsets.UTF_8).toString();
+                return rawPassword.toString();
             }
 
             @Override
